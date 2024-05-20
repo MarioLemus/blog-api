@@ -1,3 +1,10 @@
-node_modules
-npm-debug.log
-roadmap.md
+node_modules/
+build/
+.env
+roadmap.txt
+
+# dont include everything except example.json
+config/*
+!config/example.js
+
+env/*
