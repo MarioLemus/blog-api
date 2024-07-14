@@ -1,11 +1,11 @@
 module.exports = {
     server: {
-        port: 4000
+        port: process.env.SERVER_PORT
     },
     db: {
         uri: process.env.DB_CONNECTION_URL
     },
     logger: {
-        dev: 'dev'
+        dev: process.env.LOGGER_OPTION
     }
 }
