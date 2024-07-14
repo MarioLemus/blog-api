@@ -1,10 +1,6 @@
 node_modules/
 build/
 roadmap.txt
+package-lock.json
 
-# dont include everything except example.json
-config/*
-!config/example.js
-
-env/*
-!env/.env.development
+.env

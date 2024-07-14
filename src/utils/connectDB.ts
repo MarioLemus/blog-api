@@ -1,18 +1,21 @@
 import mongoose from 'mongoose'
 
-enum ValidDBs {
-    mongo = 'mongo'
+enum ValidDB {
+    mongo = 'mongo',
 }
 
-export function connectDB(dbManager:string, URI?:string) {
+type DbManager = `${ValidDB}`
+
+export function connectDB(dbManager:DbManager, URI?:string) {
     switch(dbManager) {
-        case ValidDBs.mongo:
+        case ValidDB.mongo:
             if (!URI) throw new Error('An URI string must be provided for mongo databases')
-            async function setConnection(URI:string): Promise<void | Error> {
+            async function setConnection(URI:string): Promise<void> {
                 await mongoose.connect(URI)
+                .catch(_ => console.log("DB failed to connect"))
             }
-            setConnection(URI).catch(_ => console.log("DB failed to connect"))
-            break
+            setConnection(URI)
+            return 
         default:
             throw new Error('Invalid database')
     }
