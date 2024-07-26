@@ -8,7 +8,7 @@ import {
     RepoFindAll
 } from '@interfaces/IRepo' 
 
-export class UserServices implements RepoCreateOne, RepoDeleteOne, RepoFindOne, RepoFindAll {
+export class UserServices implements RepoCreateOne, RepoUpdateOne, RepoDeleteOne, RepoFindOne, RepoFindAll {
    private userRepo: UserRepo
     constructor() {
         this.userRepo = new UserRepo()
@@ -26,7 +26,7 @@ export class UserServices implements RepoCreateOne, RepoDeleteOne, RepoFindOne, 
             password: generateHash(obj.password)
         }
         const data = await this.userRepo.createOne(validData)
-        .catch(err => { throw new Error(err) })
+        .catch(err => { throw new Error(err.message) })
 
         if (!data) {
             throw new Error('Error when creating user, no data returned')
@@ -44,7 +44,7 @@ export class UserServices implements RepoCreateOne, RepoDeleteOne, RepoFindOne, 
         }
 
         await this.userRepo.deleteOne(obj)
-        .catch(err => { throw new Error(err) })
+        .catch(err => { throw new Error(err.message) })
    }
 
    async findOne(obj: any) {
@@ -53,7 +53,7 @@ export class UserServices implements RepoCreateOne, RepoDeleteOne, RepoFindOne, 
         }
 
         const data = await this.userRepo.findOne(obj)
-        .catch(err => { throw new Error(err) })
+        .catch(err => { throw new Error(err.message) })
 
         if (!data) {
             throw new Error('Error when finding user, no data returned')
@@ -71,7 +71,7 @@ export class UserServices implements RepoCreateOne, RepoDeleteOne, RepoFindOne, 
         }
 
         const data = await this.userRepo.updateOne(oldObj, updatingObj)
-        .catch(err => { throw new Error(err) })
+        .catch(err => { throw new Error(err.message) })
 
         if (!data) {
             throw new Error('Error when updating user, no data returned')
@@ -82,6 +82,6 @@ export class UserServices implements RepoCreateOne, RepoDeleteOne, RepoFindOne, 
 
    async findAll() {
         return await this.userRepo.findAll()
-        .catch(err => { throw new Error(err) })
+        .catch(err => { throw new Error(err.message) })
    }
 }
