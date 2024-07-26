@@ -1,5 +1,6 @@
 import 'module-alias/register'
-import userRoutes from '@routes/v1/userRoute'
+import userRoutes from '@routes/v1/userRoutes'
+import authRoutes from '@routes/v1/authRoutes'
 import {connectDB} from '@utils/connectDB'
 import express from 'express'
 import cors from 'cors'
@@ -24,6 +25,7 @@ server.use(cors({origin: allowedOrigins}))
 server.use(morgan(LOGGER_OPT))
 server.use(express.json())
 server.use('/api/v1', userRoutes)
+server.use('/api/v1', authRoutes)
 
 function startServer(port: number) {
     const currServer = server.listen(port, () => {        
