@@ -8,7 +8,6 @@ export interface ControllerDeleteOne {
     deleteOne(req?:Request, res?:Response): Promise<void>;
 }
 
-
 export interface ControllerGetOne {
     getOne(req?:Request, res?:Response): Promise<void>;
 }
